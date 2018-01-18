@@ -14,12 +14,12 @@ export class ProgressComponent implements OnInit {
   ngOnInit() {
   }
 
-  cambiarValor(valor: number) {
+  // cambiarValor(valor: number) {
 
-    if ((this.progreso + valor) > 100 || (this.progreso + valor) < 0) {
-      return;
-    }
-    this.progreso += valor;
-  }
+  //   if ((this.progreso + valor) > 100 || (this.progreso + valor) < 0) {
+  //     return;
+  //   }
+  //   this.progreso += valor;
+  // }
 
 }
