@@ -11,6 +11,10 @@ import {Graficas1Component} from './graficas1/graficas1.component';
 import {ProgressComponent} from './progress/progress.component';
 import {PagesComponent} from './pages.component';
 import { IncrementadorComponent } from '../components/incrementador/incrementador.component';
+import { GraficoDonaComponent } from '../components/grafico-dona/grafico-dona.component';
+
+// ng2-charts
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -18,7 +22,8 @@ import { IncrementadorComponent } from '../components/incrementador/incrementado
     Graficas1Component,
     ProgressComponent,
     PagesComponent,
-    IncrementadorComponent
+    IncrementadorComponent,
+    GraficoDonaComponent
   ],
   exports: [
     DashboardComponent,
@@ -29,7 +34,8 @@ import { IncrementadorComponent } from '../components/incrementador/incrementado
   imports: [
     SharedModule,
     PAGES_ROUTES,
-    FormsModule
+    FormsModule,
+    ChartsModule
   ]
 })
 export class PagesModule { }
