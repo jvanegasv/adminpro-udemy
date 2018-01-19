@@ -11,7 +11,22 @@ export class RxjsComponent implements OnInit {
 
   constructor() {
 
-    const obs = new Observable(
+
+    this.regresaObservable().retry(2)
+    .subscribe(
+      numero => console.log('Sub: ', numero),
+      error => console.error('Error (segundo intento): ', error),
+      () => console.log('Fin del observador')
+    );
+
+  }
+
+  ngOnInit() {
+  }
+
+  regresaObservable(): Observable<number> {
+
+    return new Observable(
       observer => {
 
         let contador = 0;
@@ -33,16 +48,6 @@ export class RxjsComponent implements OnInit {
       }
     );
 
-    obs.retry(2)
-    .subscribe(
-      numero => console.log('Sub: ', numero),
-      error => console.error('Error (segundo intento): ', error),
-      () => console.log('Fin del observador')
-    );
-
-  }
-
-  ngOnInit() {
   }
 
 }
