@@ -24,7 +24,7 @@ export class RxjsComponent implements OnInit {
   ngOnInit() {
   }
 
-  regresaObservable(): Observable<number> {
+  regresaObservable(): Observable<any> {
 
     return new Observable(
       observer => {
@@ -33,7 +33,12 @@ export class RxjsComponent implements OnInit {
         const intervalo = setInterval( () => {
 
           contador += 1;
-          observer.next(contador);
+
+          const salida = {
+            valor: contador
+          };
+
+          observer.next(salida);
           if (contador === 3) {
             clearInterval(intervalo);
             observer.complete();
@@ -46,7 +51,11 @@ export class RxjsComponent implements OnInit {
 
         }, 1000);
       }
-    );
+    )
+    .retry(2)
+    .map((result: any) => {
+      return result.valor + 1;
+    });
 
   }
 
