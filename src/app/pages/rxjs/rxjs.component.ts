@@ -1,18 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 // tslint:disable-next-line:import-blacklist
-import { Observable } from 'rxjs/Rx';
+import { Observable, Subscription } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-rxjs',
   templateUrl: './rxjs.component.html',
   styles: []
 })
-export class RxjsComponent implements OnInit {
+export class RxjsComponent implements OnInit, OnDestroy {
 
+  subscription: Subscription;
   constructor() {
 
 
-    this.regresaObservable().retry(2)
+    this.subscription = this.regresaObservable().retry(2)
     .subscribe(
       numero => console.log('Sub: ', numero),
       error => console.error('Error (segundo intento): ', error),
@@ -22,6 +23,11 @@ export class RxjsComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  ngOnDestroy() {
+
+    this.subscription.unsubscribe();
   }
 
   regresaObservable(): Observable<any> {
@@ -39,17 +45,17 @@ export class RxjsComponent implements OnInit {
           };
 
           observer.next(salida);
-          if (contador === 3) {
-            clearInterval(intervalo);
-            observer.complete();
-          }
+          // if (contador === 3) {
+          //   clearInterval(intervalo);
+          //   observer.complete();
+          // }
 
-          if (contador === 2) {
-            // clearInterval(intervalo);
-            observer.error('Auxilio...');
-          }
+          // if (contador === 2) {
+          //   clearInterval(intervalo);
+          //   observer.error('Auxilio...');
+          // }
 
-        }, 1000);
+        }, 500);
       }
     )
     .retry(2)
