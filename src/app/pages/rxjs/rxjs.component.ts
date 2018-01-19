@@ -54,7 +54,16 @@ export class RxjsComponent implements OnInit {
     )
     .retry(2)
     .map((result: any) => {
-      return result.valor + 1;
+      return result.valor;
+    })
+    .filter( (valor, index) => {
+
+      if ((valor % 2) === 1) {
+        // impar
+        return true;
+      } else {
+        return false;
+      }
     });
 
   }
