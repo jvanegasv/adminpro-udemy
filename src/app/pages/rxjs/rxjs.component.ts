@@ -25,6 +25,7 @@ export class RxjsComponent implements OnInit {
           }
 
           if (contador === 2) {
+            // clearInterval(intervalo);
             observer.error('Auxilio...');
           }
 
@@ -32,9 +33,10 @@ export class RxjsComponent implements OnInit {
       }
     );
 
-    obs.subscribe(
+    obs.retry(2)
+    .subscribe(
       numero => console.log('Sub: ', numero),
-      error => console.error('Error: ', error),
+      error => console.error('Error (segundo intento): ', error),
       () => console.log('Fin del observador')
     );
 
