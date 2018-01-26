@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { UsuarioService } from '../services/service.index';
 
 import swal from 'sweetalert';
+import { Usuario } from '../models/usuario.model';
 
 declare function init_plugins();
 
@@ -14,7 +16,9 @@ export class RegisterComponent implements OnInit {
 
   forma: FormGroup;
 
-  constructor() { }
+  constructor(
+    public _usuarioService: UsuarioService
+  ) { }
 
   ngOnInit() {
     init_plugins();
@@ -30,8 +34,8 @@ export class RegisterComponent implements OnInit {
     });
 
     this.forma.setValue({
-      nombre: 'Test1',
-      correo: 'test1@test1.com',
+      nombre: 'Test',
+      correo: 'test1@test.com',
       password: '123456',
       password2: '123456',
       condiciones: true
@@ -64,11 +68,20 @@ export class RegisterComponent implements OnInit {
     }
 
     if (!this.forma.value.condiciones) {
-      swal('Importante','Debe aceptar los terminos y condiciones', 'warning');
+      swal('Importante', 'Debe aceptar los terminos y condiciones', 'warning');
       console.log('debe aceptar las condiciones');
       return;
     }
-    console.log(this.forma.value);
+
+    const usuario = new Usuario(
+      this.forma.value.nombre,
+      this.forma.value.correo,
+      this.forma.value.password
+    );
+
+    this._usuarioService.crearUsuario(usuario).subscribe(resp => {
+      console.log(resp);
+    });
 
   }
 
