@@ -11,7 +11,20 @@ export class UsuarioService {
   usuario: Usuario;
   token: string;
 
-  constructor(public http: HttpClient) {  }
+  constructor(public http: HttpClient) {
+    this.cargarStorage();
+  }
+
+  cargarStorage() {
+
+    if (localStorage.getItem('token')) {
+      this.token = localStorage.getItem('token');
+      this.usuario = JSON.parse( localStorage.getItem('usuario'));
+    } else {
+      this.token = '';
+      this.usuario = null;
+    }
+  }
 
   guardarStorage(id: string, token: string, usuario: Usuario) {
 
@@ -33,6 +46,11 @@ export class UsuarioService {
       return true;
     });
 
+  }
+
+  estaLogueado() {
+
+    return (this.token.length > 5) ? true : false;
   }
 
   login(usuario: Usuario, recordar: boolean = false) {
