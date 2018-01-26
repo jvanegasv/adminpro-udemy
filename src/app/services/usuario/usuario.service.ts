@@ -14,7 +14,13 @@ export class UsuarioService {
 
     const url = URL_SERVICIOS + '/login';
 
-    return this.http.post(url, usuario);
+    return this.http.post(url, usuario).map( (resp: any) => {
+      localStorage.setItem('id', resp._id);
+      localStorage.setItem('usuario', JSON.stringify(resp.usuario));
+      localStorage.setItem('token', resp.token);
+
+      return true;
+    });
 
   }
 
