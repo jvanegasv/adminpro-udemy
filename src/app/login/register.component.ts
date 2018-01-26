@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UsuarioService } from '../services/service.index';
 
@@ -17,7 +18,8 @@ export class RegisterComponent implements OnInit {
   forma: FormGroup;
 
   constructor(
-    public _usuarioService: UsuarioService
+    public _usuarioService: UsuarioService,
+    public router: Router
   ) { }
 
   ngOnInit() {
@@ -81,6 +83,7 @@ export class RegisterComponent implements OnInit {
 
     this._usuarioService.crearUsuario(usuario).subscribe(resp => {
       console.log(resp);
+      this.router.navigate(['/login']);
     });
 
   }
