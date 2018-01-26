@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
+import swal from 'sweetalert';
+
 declare function init_plugins();
 
 @Component({
@@ -62,6 +64,7 @@ export class RegisterComponent implements OnInit {
     }
 
     if (!this.forma.value.condiciones) {
+      swal('Importante','Debe aceptar los terminos y condiciones', 'warning');
       console.log('debe aceptar las condiciones');
       return;
     }
