@@ -19,6 +19,9 @@ import { PromesasComponent } from './promesas/promesas.component';
 import { ChartsModule } from 'ng2-charts';
 import { RxjsComponent } from './rxjs/rxjs.component';
 
+// Pipes
+import { PipesModule } from '../pipes/pipes.module';
+
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -41,7 +44,8 @@ import { RxjsComponent } from './rxjs/rxjs.component';
     SharedModule,
     PAGES_ROUTES,
     FormsModule,
-    ChartsModule
+    ChartsModule,
+    PipesModule
   ]
 })
 export class PagesModule { }
