@@ -12,6 +12,7 @@ export class ProfileComponent implements OnInit {
   usuario: Usuario;
 
   imagenSubir: File;
+  imagenTemp: string;
 
   constructor(public _usuarioService: UsuarioService) {
 
@@ -40,14 +41,25 @@ export class ProfileComponent implements OnInit {
       return;
     }
 
+    if (archivo.type.indexOf('image') < 0) {
+      swal('Solo imagenes', 'el archivo no es una imagen', 'error');
+      this.imagenSubir = null;
+      return;
+    }
+
     this.imagenSubir = archivo;
+
+    const reader = new FileReader();
+    const urlImagenTemp = reader.readAsDataURL(archivo);
+
+    reader.onloadend = () => this.imagenTemp = reader.result;
 
   }
 
   cambiarImagen() {
 
-    this._usuarioService.cambiarImagen(this.imagenSubir,this.usuario._id);
-    
+    this._usuarioService.cambiarImagen(this.imagenSubir, this.usuario._id);
+
   }
 
 }
