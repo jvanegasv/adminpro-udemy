@@ -13,6 +13,7 @@ export class UsuariosComponent implements OnInit {
 
   desde: number = 0;
   totalRegistros: number = 0;
+  cargando: boolean = true;
 
   constructor(public _usuarioService: UsuarioService) { }
 
@@ -23,11 +24,14 @@ export class UsuariosComponent implements OnInit {
 
   cargarUsuarios() {
 
+    this.cargando = true;
+
     this._usuarioService.cargarUsuarios(this.desde)
     .subscribe((resp: any) => {
       console.log(resp);
       this.totalRegistros = resp.total;
       this.usuarios = resp.usuarios;
+      this.cargando = false;
     });
   }
 
@@ -41,6 +45,23 @@ export class UsuariosComponent implements OnInit {
     this.desde = desde;
 
     this.cargarUsuarios();
+  }
+
+  buscarUsuario(temrino: string) {
+
+    if (temrino.length <= 0) {
+      this.cargarUsuarios();
+      return;
+    }
+
+    this.cargando = true;
+    console.log(temrino);
+    this._usuarioService.buscarUsuarios(temrino)
+    .subscribe((usuarios: Usuario[]) => {
+      console.log(usuarios);
+      this.usuarios = usuarios;
+      this.cargando = false;
+    });
   }
 
 }
