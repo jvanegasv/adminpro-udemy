@@ -28,6 +28,9 @@ export class HospitalService {
 
   obtenerHospital(id: string) {
 
+    const url = URL_SERVICIOS + '/hospital/' + id;
+
+    return this.http.get(url);
   }
 
   borrarHospital(id: string) {
