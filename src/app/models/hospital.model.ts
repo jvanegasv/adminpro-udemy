@@ -1,9 +1,9 @@
 export class Hospital {
 
-    constructor(
+    constructor (
         public nombre: string,
         public img?: string,
-        public usuario?: any,
         public _id?: string
-    ) {}
+    ) { }
+
 }
