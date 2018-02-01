@@ -68,7 +68,7 @@ export class HospitalService {
 
     const url = URL_SERVICIOS + '/hospital/' + hospital._id + '?token=' + this._usuarioService.token;
 
-    return this.http.put(url, hospital);
+    return this.http.put(url, hospital).map( (resp: any) => resp.hospital);
   }
 
 }
