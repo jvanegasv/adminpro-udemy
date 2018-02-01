@@ -9,13 +9,20 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class HospitalService {
 
+  public totalHospitales: number = 0;
+
   constructor(public http: HttpClient, public _usuarioService: UsuarioService) { }
 
   cargarHospitales() {
 
     const url = URL_SERVICIOS + '/hospital';
 
-    return this.http.get(url);
+    return this.http.get(url)
+    .map( (resp: any) => {
+      console.log(resp);
+      this.totalHospitales = resp.total;
+      return resp.hospitales;
+    });
 
   }
 

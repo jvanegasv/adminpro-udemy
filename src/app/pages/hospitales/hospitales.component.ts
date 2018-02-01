@@ -13,7 +13,6 @@ declare var swal: any;
 export class HospitalesComponent implements OnInit {
 
   hospitales: Hospital[] = [];
-  totalRegistros: number = 0;
   cargando: boolean = true;
   imagenCargada;
 
@@ -30,9 +29,7 @@ export class HospitalesComponent implements OnInit {
 
     this.cargando = true;
     this._hospitalService.cargarHospitales().subscribe( (resp: any) => {
-      console.log(resp);
-      this.hospitales = resp.hospitales;
-      this.totalRegistros = resp.total;
+      this.hospitales = resp;
       this.cargando = false;
     });
   }
