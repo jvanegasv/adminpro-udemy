@@ -19,11 +19,11 @@ export class HospitalesComponent implements OnInit {
 
   constructor(public _hospitalService: HospitalService, public _modalUploadService: ModalUploadService) {
 
-    this._modalUploadService.notificacion.subscribe((resp) => this.cargaHospitales());
   }
 
   ngOnInit() {
     this.cargaHospitales();
+    this._modalUploadService.notificacion.subscribe((resp) => this.cargaHospitales());
   }
 
   cargaHospitales() {
@@ -89,11 +89,7 @@ export class HospitalesComponent implements OnInit {
       return;
     }
 
-    this.cargando = true;
-    console.log(hospital);
-    this._hospitalService.actualizarHospital(hospital).subscribe( (resp) => {
-      this.cargaHospitales();
-    });
+    this._hospitalService.actualizarHospital(hospital).subscribe( () => {});
   }
 
   mostrarModal(id: string) {
