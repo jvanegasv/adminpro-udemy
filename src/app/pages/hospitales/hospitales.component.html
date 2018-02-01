@@ -27,7 +27,10 @@
             <div class="card-body">
 
                 <div class="text-right">
-                    <button type="button" (click)="crearHospital()" class="btn waves-effect btn-rounded btn-primary">Crear Hospital</button>
+                    <button type="button" (click)="crearHospital()" class="btn waves-effect btn-rounded btn-primary">
+                        <i class="fa fa-plus"></i>
+                        Crear Hospital
+                    </button>
                 </div>
 
                 <h3 class="card-title">Hospitales registrados (<small>{{ _hospitalService.totalHospitales }}</small>)</h3>
