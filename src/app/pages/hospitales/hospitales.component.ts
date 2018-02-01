@@ -107,6 +107,10 @@ export class HospitalesComponent implements OnInit {
       content: 'input',
     })
     .then((value) => {
+      if (!value) {
+        swal('Error', 'El nombre del hospital no puede ser vacio', 'error');
+        return;
+      }
       this._hospitalService.crearHospital(value).subscribe((resp) => {
         this.cargaHospitales();
       });
