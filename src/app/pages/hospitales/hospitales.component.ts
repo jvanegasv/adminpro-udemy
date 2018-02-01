@@ -14,6 +14,7 @@ export class HospitalesComponent implements OnInit {
 
   hospitales: Hospital[] = [];
   cargando: boolean = true;
+  desde: number = 0;
   imagenCargada;
 
   constructor(public _hospitalService: HospitalService, public _modalUploadService: ModalUploadService) {
@@ -28,10 +29,22 @@ export class HospitalesComponent implements OnInit {
   cargaHospitales() {
 
     this.cargando = true;
-    this._hospitalService.cargarHospitales().subscribe( (resp: any) => {
+    this._hospitalService.cargarHospitales(this.desde).subscribe( (resp: any) => {
       this.hospitales = resp;
       this.cargando = false;
     });
+  }
+
+  cambiarDesde(valor: number) {
+
+    const desde = this.desde + valor;
+
+    if (desde < 0 || desde >= this._hospitalService.totalHospitales) {
+      return;
+    }
+    this.desde = desde;
+
+    this.cargaHospitales();
   }
 
   buscarHospital(termino: string) {
@@ -43,7 +56,7 @@ export class HospitalesComponent implements OnInit {
     this.cargando = true;
     this._hospitalService.buscarHospital(termino).subscribe( (resp: any) => {
       console.log(resp);
-      this.hospitales = resp.hospitales;
+      this.hospitales = resp;
       this.cargando = false;
     });
   }
