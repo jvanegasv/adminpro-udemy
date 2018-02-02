@@ -12,6 +12,7 @@ declare var swal: any;
 export class MedicosComponent implements OnInit {
 
   medicos: Medico[] = [];
+  desde: number = 0;
 
   constructor(
     public _medicosService: MedicoService
@@ -24,7 +25,7 @@ export class MedicosComponent implements OnInit {
 
   cargarMedicos() {
 
-    this._medicosService.cargarMedicos().subscribe( medicos => this.medicos = medicos);
+    this._medicosService.cargarMedicos(this.desde).subscribe( medicos => this.medicos = medicos);
 
   }
 
@@ -56,4 +57,17 @@ export class MedicosComponent implements OnInit {
     });
 
   }
+
+  cambiarDesde(valor: number) {
+
+    const desde = this.desde + valor;
+
+    if (desde < 0 || desde >= this._medicosService.totalMedicos) {
+      return;
+    }
+    this.desde = desde;
+
+    this.cargarMedicos();
+  }
+
 }
