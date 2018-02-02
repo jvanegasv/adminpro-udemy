@@ -105,6 +105,11 @@ export class UsuarioService {
     .map( (resp: any) => {
       swal('ERROR', resp.mensaje, 'error');
       return resp.usuario;
+    })
+    .catch( err => {
+      console.log(err.error.mensaje);
+      swal(err.error.mensaje, err.error.errors.message, 'error');
+      return Observable.throw(err);
     });
   }
 
@@ -127,6 +132,11 @@ export class UsuarioService {
       swal('Usuario actualizado', usuario.nombre, 'success');
 
       return true;
+    })
+    .catch( err => {
+      console.log(err.error.mensaje);
+      swal(err.error.mensaje, err.error.errors.message, 'error');
+      return Observable.throw(err);
     });
   }
 
