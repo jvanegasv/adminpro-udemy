@@ -13,6 +13,7 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { HospitalesComponent } from './hospitales/hospitales.component';
 import { MedicosComponent } from './medicos/medicos.component';
 import { MedicoComponent } from './medicos/medico.component';
+import { BusquedaComponent } from './busqueda/busqueda.component';
 
 const pagesRoutes: Routes = [
   {
@@ -26,6 +27,7 @@ const pagesRoutes: Routes = [
       { path: 'account-settings', component: AccountSettingsComponent, data: { titulo : 'Settings'} },
       { path: 'perfil', component: ProfileComponent, data: { titulo : 'Perfil de usuario'} },
       { path: 'promesas', component: PromesasComponent, data: { titulo : 'Promesas'} },
+      { path: 'busqueda/:termino', component: BusquedaComponent, data: { titulo : 'Buscador'} },
       { path: 'rxjs', component: RxjsComponent, data: { titulo : 'RxJs'} },
       // Mantenimientos
       { path: 'usuarios', component: UsuariosComponent, data: { titulo : 'Mantenimiento de Usuarios'} },
