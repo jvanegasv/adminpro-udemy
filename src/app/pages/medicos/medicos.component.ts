@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MedicoService } from '../../services/service.index';
 import { Medico } from '../../models/medico.model';
 
+declare var swal: any;
+
 @Component({
   selector: 'app-medicos',
   templateUrl: './medicos.component.html',
@@ -37,7 +39,21 @@ export class MedicosComponent implements OnInit {
     this._medicosService.buscarMedicos(termino).subscribe( medicos => this.medicos = medicos);
   }
 
-  borrarMedico() {
+  borrarMedico(medico: Medico) {
+
+    swal({
+      title: 'Esta seguro',
+      text: 'Esta a punto de eliminar a ' + medico.nombre,
+      icon: 'warning',
+      buttons: true,
+      dangerMode: true
+    }).then( borrar => {
+      if (borrar) {
+        this._medicosService.borrarMedico(medico._id).subscribe(() => {
+          this.cargarMedicos();
+        });
+      }
+    });
 
   }
 }
