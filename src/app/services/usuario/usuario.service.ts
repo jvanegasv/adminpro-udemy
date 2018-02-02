@@ -6,6 +6,7 @@ import { URL_SERVICIOS } from '../../config/config';
 import { SubirArchivoService } from '../subir-archivo/subir-archivo.service';
 
 import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class UsuarioService {
@@ -82,10 +83,16 @@ export class UsuarioService {
 
     const url = URL_SERVICIOS + '/login';
 
-    return this.http.post(url, usuario).map( (resp: any) => {
+    return this.http.post(url, usuario)
+    .map( (resp: any) => {
       console.log('login normal', resp);
       this.guardarStorage(resp._id, resp.token, resp.usuario, resp.role);
       return true;
+    })
+    .catch( err => {
+      console.log(err.error.mensaje);
+      swal('Login error', err.error.mensaje, 'error');
+      return Observable.throw(err);
     });
 
   }
