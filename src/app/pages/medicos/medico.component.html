@@ -36,7 +36,7 @@
     <div *ngIf="medico._id" class="col-md-3">
         <div class="card card-body">
             <h4 class="box-title m-b-0">Foto</h4>
-            <img [src]="medico.img | imagen:'medico'" class="rounded img-fluid">
+            <img (click)="cambiarFoto()" [src]="medico.img | imagen:'medico'" class="rounded img-fluid pointer">
         </div>
     </div>
 </div>
