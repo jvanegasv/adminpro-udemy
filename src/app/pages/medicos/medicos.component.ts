@@ -26,19 +26,18 @@ export class MedicosComponent implements OnInit {
 
   }
 
-  buscarMedico() {
+  buscarMedico(termino: string) {
 
-  }
+    if (termino.length === 0) {
 
-  crearMedico() {
+      this.cargarMedicos();
+      return;
+    }
 
-  }
-
-  editarMedico() {
-
+    this._medicosService.buscarMedicos(termino).subscribe( medicos => this.medicos = medicos);
   }
 
   borrarMedico() {
-    
+
   }
 }
