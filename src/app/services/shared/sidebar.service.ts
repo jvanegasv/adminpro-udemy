@@ -31,7 +31,10 @@ export class SidebarService {
   menu: any = [];
   constructor(public _usuarioService: UsuarioService) {
 
-    this.menu = _usuarioService.menu;
+  }
+
+  cargarMenu() {
+    this.menu = this._usuarioService.menu;
   }
 
 }
